@@ -1,0 +1,33 @@
+单个参数：mybatis不作特殊处理，
+    #{参数名}：取出参数值
+
+多个参数：mybatis会特殊处理
+    多个参数封闭成一个map,
+    key: param1,param2. ... paramN
+    value: 传入参数的值
+    #{}就是从map中获取指定参数的值;
+
+    异常：
+    BindingException: Parameter 'id' not found.
+    Available parameters are [arg1, arg0, param1, param2]
+
+    操作：
+        方法：public Employee getEmpByIdAndLastName(Integer id, String lastName);
+        取值：#{id} #{lastName}
+
+命名参数，明确指定封闭参数时map的key; @Param{"id"}
+    解决方案：
+    方法上参数添加@Param注解：
+    public Employee getEmpByIdAndLastName(@Param("id") Integer id, @Param("lastName") String lastName);
+    #{指定的key}指出对应的参数值。
+
+POJO:(推荐使用)
+如果多个参数正好是我们业务逻辑的数据模型，就直接传递pojo对应
+    #{属性名}：取出传入的pojo对象的属性值。
+
+MAP:
+如果多个参数没有对应的业务模型，没有对应的pojo;为了方便，但不经常使用。我们直接传递map;
+    #{key}: 取出map中对应的值。
+
+TO:
+如果多个参数不是业务模型中的数据，但是经常使用，推荐来编写一个TO（Transfer Object）对象来传递数据。

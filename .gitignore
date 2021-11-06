@@ -1,0 +1,5 @@
+# Project exclude paths
+/MyBatis_01_HelloWorld/target/
+/MyBatis_02_config/target/
+/MyBatis_03_mapper/target/
+/MyBatis_06_ssm/target/

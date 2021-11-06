@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.mybatis.dao.EmployeeMapper">
+<!--
+namespace: 名称空间
+id: 唯一标识
+resultType: 返回值类型
+#{id}: 从传递过来的参数中取出id值
+databaseId="mysql" 指定不同的数据库厂商。
+-->
+
+    <select id="getEmpById" resultType="com.atguigu.mybatis.bean.Employee" databaseId="mysql">
+        select id, last_name, email, gender from tbl_employee where id = #{id}
+    </select>
+
+    <select id="getEmpById" resultType="com.atguigu.mybatis.bean.Employee" databaseId="oracle">
+        select id, last_name, email, gender from tbl_employee where id = #{id}
+    </select>
+
+    <select id="getEmpByIdAndLastName" resultType="com.atguigu.mybatis.bean.Employee" databaseId="mysql">
+        select id, last_name, email, gender from tbl_employee where id = #{id} and last_name=#{lastName}
+    </select>
+
+    <select id="getEmpByMap" resultType="com.atguigu.mybatis.bean.Employee" databaseId="mysql">
+        select id, last_name, email, gender from tbl_employee where id = ${id} and last_name=#{lastName}
+    </select>
+
+    <!--public void addEmp(Employee employee);-->
+    <!--parameterType可以省略，-->
+    <!--获取自增主键的值：
+        mysql支持自增主键，自增主键的获取，mybatis也是通过statement.getGeneratedKeys()
+        设置useGeneratedKeys="true"，使用自增主键策略，
+        keyProperty，指定对应的主键值，也就是mybatis获取到主键后，将这个值封闭给javabean的哪个属性中。
+    -->
+    <insert id="addEmp" parameterType="com.atguigu.mybatis.bean.Employee"
+     useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_employee(last_name, email, gender)
+        values (#{lastName}, #{email}, #{gender})
+    </insert>
+
+    <!-- public void updateEmp(Employee employee); -->
+    <update id="updateEmp">
+        update tbl_employee
+        set last_name=#{lastName},email=#{email},gender=#{gender}
+        where id =#{id}
+    </update>
+
+    <!--
+        public void deleteEmpById(Integer id);
+    -->
+    <delete id="deleteEmpById">
+        delete from tbl_employee where id =#{id}
+    </delete>
+</mapper>

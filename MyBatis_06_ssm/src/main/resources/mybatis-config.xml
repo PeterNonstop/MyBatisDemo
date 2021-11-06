@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--
+       1. mybatis可以使用properties来引入外面properties配置文件的内容
+       resource: 引入类路径下的资源
+       url: 引入网络资源或磁盘路径下的资源
+    -->
+
+
+    <!--
+        2. settings包含很多重要的设置项目
+    -->
+    <settings>
+        <!--设置mybatis输出日志-->
+        <setting name="logImpl" value="STDOUT_LOGGING"></setting>
+        <!--下划线命名对应驼峰命名-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!--3. typeAliases别名处理器，为我们的java类型起别名
+           别名不区分大小写
+    -->
+    <typeAliases>
+        <!--typeAlias,为某个java对象起别名
+            type: 指定要起别名的全类型名；默认别名就是类型名（小写）;
+            alias: 指定新的别名
+        -->
+        <!--<typeAlias type="com.atguigu.mybatis.bean.Employee" alias="emp"/>-->
+
+        <!--package批量起别名
+            name: 指定别名（为当前包及下面的后代包的每一类都起一个默认别名）;默认别名就是类型名（小写）
+        -->
+
+        <!--在批量起别名的情况下，使用@Alias注解为某个类型指定新的别名-->
+    </typeAliases>
+
+    <!--4. environments: 环境们，可以配置多个mybatis环境。使用default指定使用某个环境。
+           environment: 必须有2个标签，id表示当前环境的唯一标识
+            transactionManager: 事务管理器
+                type: 事务管理器类型,  type="[JDBC|MANAGED]"
+                JDBC: JdbcTransactionFactory
+                MANAGED: ManagedTransactionFactory
+
+            dataSource: 数据源 There are three built-in dataSource types (i.e. type="[UNPOOLED|POOLED|JNDI]")
+                UNPOOLED: UnpooledDataSourceFactory
+                POOLED: PooledDataSourceFactory
+                JNDI: JndiDataSourceFactory
+                自定义数据源：实现DataSourceFactory接口；type是自定义全类名。
+    -->
+
+
+    <!--5. databaseIdProvider
+       配置支持多数据源厂商，Oracle，mysql。。。
+       type="DB_VENDOR",VendorDatabaseIdProvider
+       作用是得到数据库厂商的标识，mybatis就能根据数据库厂商标识来执行不同的sql
+    -->
+    <databaseIdProvider type="DB_VENDOR">
+        <property name="SQL Server" value="sqlserver"/>
+        <property name="MySQL" value="mysql"/>
+        <property name="Oracle" value="oracle" />
+    </databaseIdProvider>
+
+    <!--将我们写好的sql映射文件(EmployeeMapper.xml)注册到全局配置文件中-->
+    <!--6. mappers,将sql映射到全局配置中-->
+    <mappers>
+        <!--mapper: 注册一个sql映射
+            注册配置文件：
+            resource: 类路径下的sql映射文件；
+            url: 网络路径或磁盘路径下的sql映射文件；mybatis.mapper
+            注册接口：
+            class: 引用（注册）接口
+                1. 有sql映射文件，映射文件与接口文件同名，且在同一目录下；
+                2. 没有sql映射文件，所有的sql都是利用注解写在接口上。
+                推荐：
+                    比较重要的dao接口我们来写sql映射文件；
+                    不重要、简单的Dao接口为了开发快速可以使用注解。
+
+        -->
+        <!--<mapper resource="EmployeeMapper.xml"/>-->
+        <!--<mapper resource="mybatis/mapper/EmployeeMapper.xml"/>-->
+        <!--<mapper class="com.atguigu.mybatis.dao.EmployeeMapperAnnoation"/>-->
+
+        <!--批量注册-->
+        <!--<package name="com.atguigu.mybatis.dao"/>-->
+
+    </mappers>
+</configuration>
