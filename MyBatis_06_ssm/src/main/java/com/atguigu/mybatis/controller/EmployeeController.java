@@ -30,7 +30,7 @@ public class EmployeeController {
     private ApplicationContext applicationContext;
 
     @RequestMapping("/getEmps")
-    public String getEmployee(Map<String,Object> map) {
+    public String getEmployee(Map<String, Object> map) {
         System.out.println("getEmployee========");
         System.out.println(Arrays.asList(applicationContext.getBeanDefinitionNames()));
 
@@ -48,7 +48,7 @@ public class EmployeeController {
 
     @RequestMapping("/addEmp")
     @ResponseBody
-    public String addEmployee(Map<String,Object> map) {
+    public String addEmployee(Map<String, Object> map) {
 
         Employee employee = new Employee(null, "xiao", "xiao@test.com", "1");
 
@@ -58,8 +58,18 @@ public class EmployeeController {
 
         if (addEmp) {
             return "add success";
-        }else{
+        } else {
             return "Failed!!!";
         }
+    }
+
+    @RequestMapping("/addBatchEmp")
+    @ResponseBody
+    public String addBatchEmployee(Map<String, Object> map) {
+
+        employeeService.addBatchEmp();
+
+        return "add success";
+
     }
 }

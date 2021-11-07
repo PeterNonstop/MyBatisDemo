@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="MyBatis_03_mapper" />
+        <module name="MyBatis_07_mbg" />
         <module name="MyBatis_01_HelloWorld" />
         <module name="MyBatis_06_ssm" />
         <module name="MyBatis_02_config" />

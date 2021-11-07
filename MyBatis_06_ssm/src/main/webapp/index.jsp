@@ -6,9 +6,11 @@
 <body>
 <h2>Hello World!</h2>
 <h1>
-<a href="getEmps">查询所有员工</a>
-<br>
-<a href="addEmp">添加员工</a>
+    <a href="getEmps">查询所有员工</a>
+    <br>
+    <a href="addEmp">添加员工</a>
+    <br>
+    <a href="addBatchEmp">批量添加员工</a>
 </h1>
 </body>
 </html>

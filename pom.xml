@@ -13,6 +13,7 @@
         <module>MyBatis_02_config</module>
         <module>MyBatis_03_mapper</module>
         <module>MyBatis_06_ssm</module>
+        <module>MyBatis_07_mbg</module>
     </modules>
 
     <properties>
